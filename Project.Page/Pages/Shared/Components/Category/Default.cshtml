@@ -1,0 +1,27 @@
+@model List<Project.Page.Pages.Models.CategoryResponse>
+<div class="div-header">
+
+    <div class="div-opshen">
+        <ul>
+            <li>خانه</li>
+            <li>دسته بندی مقالات
+                <ul>
+                    @foreach (var category in Model)
+                    {
+                        <li>
+                            @category.Name
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="div-from">
+        <form asp-page="/Auth/Logout">
+            @Html.AntiForgeryToken()
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,7 @@
+@using Project.Page.Pages.Models
+@model Page.Pages.Models.ArticleResponse
+
+@foreach (var paragraph in Model.Paragraphs!)
+{
+    <partial name="Shared/Paragraph" model="paragraph"/>
+}
