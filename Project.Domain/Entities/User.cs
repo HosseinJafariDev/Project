@@ -1,0 +1,26 @@
+using Microsoft.AspNetCore.Identity;
+
+namespace Project.Domain.Entities;
+
+public class User : IdentityUser<long>
+{
+    public string Firstname { get; private set; }
+    public string Lastname { get; private set; }
+    public bool IsActive { get; private set; } = true;
+
+    public ICollection<Article> Articles { get; set; }
+
+    private User()
+    {
+    }
+
+    public User(string firstname, string lastname, string username)
+    {
+        Firstname = firstname;
+        Lastname = lastname;
+        UserName = username;
+    }
+
+    public void Activate() => IsActive = true;
+    public void Deactivate() => IsActive = false;
+}

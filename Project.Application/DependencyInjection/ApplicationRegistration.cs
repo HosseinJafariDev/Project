@@ -4,7 +4,7 @@ namespace Project.Application.DependencyInjection;
 
 public static class ApplicationRegistration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         return services;
     }
