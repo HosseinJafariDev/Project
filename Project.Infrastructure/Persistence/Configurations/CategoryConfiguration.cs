@@ -10,13 +10,18 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         builder
             .ToTable("Categories");
-        
+
         builder
             .HasKey(x => x.Id);
-        
+
         builder.Property(x => x.Name)
             .HasColumnType("nvarchar")
             .HasMaxLength(100)
             .IsRequired();
+
+        builder
+            .HasMany(x => x.ArticlesCategories)
+            .WithOne(c => c.Category)
+            .HasForeignKey(f => f.CategoryId);
     }
 }

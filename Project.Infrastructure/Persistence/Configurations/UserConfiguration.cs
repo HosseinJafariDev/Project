@@ -29,7 +29,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(x => x.IsActive)
             .HasDefaultValue(true);
-        
-        
+
+        builder
+            .HasMany(x => x.Articles)
+            .WithOne(x => x.Author)
+            .HasForeignKey(a => a.AuthorId);
     }
 }

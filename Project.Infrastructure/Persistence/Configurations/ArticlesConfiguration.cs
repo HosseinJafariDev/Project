@@ -23,8 +23,8 @@ public class ArticlesConfiguration : IEntityTypeConfiguration<Article>
             .IsRequired();
 
         builder
-            .HasOne(x => x.Author)
-            .WithMany(x => x.Articles)
-            .HasForeignKey(x => x.AuthorId);
+            .HasMany(x => x.ArticleCategories)
+            .WithOne(c => c.Article)
+            .HasForeignKey(x => x.ArticleId);
     }
 }

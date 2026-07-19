@@ -4,11 +4,12 @@ namespace Project.Domain.Entities;
 
 public class User : IdentityUser<long>
 {
+    private readonly List<Article> _list = [];
     public string Firstname { get; private set; }
     public string Lastname { get; private set; }
     public bool IsActive { get; private set; } = true;
 
-    public ICollection<Article> Articles { get; set; }
+    public IReadOnlyCollection<Article> Articles => _list.AsReadOnly();
 
     private User()
     {

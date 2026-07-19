@@ -6,10 +6,11 @@ public class Category
     {
     }
 
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
+    private readonly List<ArticleCategory> _articleCategories = [];
+    public int Id { get; private set; }
+    public string Name { get; private set; } = null!;
 
-    public ICollection<ArticleCategory>? ArticlesCategories { get; set; }
+    public ICollection<ArticleCategory>? ArticlesCategories => _articleCategories.AsReadOnly();
 
     public Category(int id, string name)
     {

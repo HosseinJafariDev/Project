@@ -2,9 +2,19 @@ namespace Project.Domain.Entities;
 
 public class ArticleCategory
 {
-    public long Id { get; set; }
-    public long ArticleId { get; set; }
-    public int CategoryId { get; set; }
-    public Article? Article { get; set; }
-    public Category? Category { get; set; }
+    private ArticleCategory()
+    {
+    }
+
+    public long Id { get; private set; }
+    public long ArticleId { get; private set; }
+    public int CategoryId { get; private set; }
+    public Article? Article { get; private set; }
+    public Category? Category { get; private set; }
+
+    public ArticleCategory(int categoryId, long articleId)
+    {
+        ArticleId = articleId;
+        CategoryId = categoryId;
+    }
 }

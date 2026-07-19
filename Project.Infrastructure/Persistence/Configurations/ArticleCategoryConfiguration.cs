@@ -13,15 +13,5 @@ public class ArticleCategoryConfiguration : IEntityTypeConfiguration<ArticleCate
 
         builder
             .HasKey(x => x.Id);
-
-        builder
-            .HasOne(x => x.Article)
-            .WithMany(x => x.ArticleCategories)
-            .HasForeignKey(x => x.ArticleId);
-
-        builder
-            .HasOne(x => x.Category)
-            .WithMany(x => x.ArticlesCategories)
-            .HasForeignKey(x => x.CategoryId);
     }
 }
