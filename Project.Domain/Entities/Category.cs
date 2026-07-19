@@ -9,6 +9,7 @@ public class Category
     private readonly List<ArticleCategory> _articleCategories = [];
     public int Id { get; private set; }
     public string Name { get; private set; } = null!;
+    public bool IsDeleted { get; private set; } = false;
 
     public ICollection<ArticleCategory>? ArticlesCategories => _articleCategories.AsReadOnly();
 

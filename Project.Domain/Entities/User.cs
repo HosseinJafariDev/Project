@@ -8,6 +8,7 @@ public class User : IdentityUser<long>
     public string Firstname { get; private set; }
     public string Lastname { get; private set; }
     public bool IsActive { get; private set; } = true;
+    public bool IsDeleted { get; private set; } = false;
 
     public IReadOnlyCollection<Article> Articles => _list.AsReadOnly();
 

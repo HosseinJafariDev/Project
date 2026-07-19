@@ -15,6 +15,7 @@ public class Article
     public string? Content { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
+    public bool IsDeleted { get; private set; } = false;
 
     public User? Author { get; private set; }
     public IReadOnlyCollection<ArticleCategory>? ArticleCategories => _list.AsReadOnly();
