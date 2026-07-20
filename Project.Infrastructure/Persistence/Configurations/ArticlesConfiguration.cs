@@ -26,5 +26,9 @@ public class ArticlesConfiguration : IEntityTypeConfiguration<Article>
             .HasMany(x => x.ArticleCategories)
             .WithOne(c => c.Article)
             .HasForeignKey(x => x.ArticleId);
+
+        builder
+            .Property(x => x.IsDeleted)
+            .HasDefaultValue(false);
     }
 }

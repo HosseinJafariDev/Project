@@ -23,5 +23,9 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .HasMany(x => x.ArticlesCategories)
             .WithOne(c => c.Category)
             .HasForeignKey(f => f.CategoryId);
+
+        builder
+            .Property(x => x.IsDeleted)
+            .HasDefaultValue(false);
     }
 }

@@ -8,7 +8,6 @@ public class Article
     {
     }
 
-    private readonly List<ArticleCategory> _list = [];
     public long Id { get; private set; }
     public long AuthorId { get; private set; }
     public string? Title { get; private set; }
@@ -16,6 +15,7 @@ public class Article
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public bool IsDeleted { get; private set; } = false;
+    private readonly List<ArticleCategory> _list = [];
 
     public User? Author { get; private set; }
     public IReadOnlyCollection<ArticleCategory>? ArticleCategories => _list.AsReadOnly();
@@ -42,4 +42,6 @@ public class Article
     {
         UpdatedAt = updatedAt;
     }
+
+    public void Delete() => IsDeleted = true;
 }

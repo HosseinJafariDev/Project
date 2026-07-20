@@ -14,5 +14,9 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder
             .Property(x => x.IsActive)
             .HasDefaultValue(true);
+
+        builder
+            .Property(x => x.IsDeleted)
+            .HasDefaultValue(false);
     }
 }
