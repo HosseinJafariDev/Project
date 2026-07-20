@@ -13,6 +13,7 @@ using Project.Infrastructure.Persistence.Identity.Service.Login;
 using Project.Infrastructure.Persistence.Identity.Service.Logout;
 using Project.Infrastructure.Persistence.Identity.Service.Password;
 using Project.Infrastructure.Persistence.Identity.Service.Register;
+using Project.Infrastructure.Persistence.Identity.Service.UserService;
 using Project.Infrastructure.Persistence.Repositories;
 
 namespace Project.Infrastructure.DependencyInjection;
@@ -31,6 +32,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IForgotPasswordService, ForgotPasswordService>();
         services.AddScoped<IRegisterService, RegisterService>();
         services.AddScoped<IdentitySeeder>();
+        services.AddScoped<IUserService, UserService>();
 
         #endregion
 
