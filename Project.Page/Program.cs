@@ -1,4 +1,5 @@
 using Project.Infrastructure.DependencyInjection;
+using Project.Infrastructure.Persistence.Identity;
 using Project.Page.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,14 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+
+    await seeder.SeedRolesAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
