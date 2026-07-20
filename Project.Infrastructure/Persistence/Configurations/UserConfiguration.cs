@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Project.Domain.Constants;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Users;
 
 namespace Project.Infrastructure.Persistence.Configurations;
 
@@ -17,13 +19,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(x => x.Firstname)
             .HasColumnType("nvarchar")
-            .HasMaxLength(100)
+            .HasMaxLength(UserConstants.FirstnameMaxLength)
             .IsRequired();
 
         builder
             .Property(x => x.Lastname)
             .HasColumnType("nvarchar")
-            .HasMaxLength(100)
+            .HasMaxLength(UserConstants.LastnameMaxLength)
             .IsRequired();
 
         builder

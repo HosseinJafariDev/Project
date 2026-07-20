@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Project.Domain.Constants;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Articles;
 
 namespace Project.Infrastructure.Persistence.Configurations;
 
@@ -14,7 +16,7 @@ public class ArticlesConfiguration : IEntityTypeConfiguration<Article>
         builder
             .Property(x => x.Title)
             .HasColumnType("nvarchar")
-            .HasMaxLength(128)
+            .HasMaxLength(ArticleConstants.TitleMaxLength)
             .IsRequired();
 
         builder
