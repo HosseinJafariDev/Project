@@ -1,5 +1,5 @@
 namespace Project.Application.Exceptions;
 
-public class NotFoundException(string message) : ApplicationException(message)
+public class NotFoundException(string message) : ApplicationLayerException(message)
 {
 }

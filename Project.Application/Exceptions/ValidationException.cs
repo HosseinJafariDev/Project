@@ -1,5 +1,5 @@
 namespace Project.Application.Exceptions;
 
-public class ValidationException(string message) : ApplicationException(message)
+public class ValidationException(string message) : ApplicationLayerException(message)
 {
 }
