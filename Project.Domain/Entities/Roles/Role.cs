@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Project.Domain.Exceptions;
 
-namespace Project.Domain.Entities;
+namespace Project.Domain.Entities.Roles;
 
 public class Role : IdentityRole<long>
 {
@@ -10,6 +11,8 @@ public class Role : IdentityRole<long>
 
     public Role(string name) : base(name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new DomainException(RoleMessages.RoleNameRequired);
     }
 
     public bool IsActive { get; private set; } = true;

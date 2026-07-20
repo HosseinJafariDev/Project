@@ -1,4 +1,8 @@
-namespace Project.Domain.Entities;
+using Project.Domain.Entities.Articles;
+using Project.Domain.Entities.Categories;
+using Project.Domain.Exceptions;
+
+namespace Project.Domain.Entities.ArticleCategories;
 
 public class ArticleCategory
 {
@@ -14,6 +18,12 @@ public class ArticleCategory
 
     public ArticleCategory(int categoryId, long articleId)
     {
+        if (articleId <= 0)
+            throw new DomainException(ArticleCategoryMessages.InvalidArticleCategoryId);
+
+        if (categoryId <= 0)
+            throw new DomainException(ArticleCategoryMessages.InvalidArticleId);
+
         ArticleId = articleId;
         CategoryId = categoryId;
     }

@@ -1,5 +1,6 @@
 using Project.Application.interfaces.Repository;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Articles;
 
 namespace Project.Infrastructure.Persistence.Repositories;
 

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using Project.Domain.Entities.Articles;
+using Project.Domain.Exceptions;
 
-namespace Project.Domain.Entities;
+namespace Project.Domain.Entities.Users;
 
 public class User : IdentityUser<long>
 {
@@ -20,6 +22,17 @@ public class User : IdentityUser<long>
 
     public User(string firstname, string lastname, string username, string phone)
     {
+        if (string.IsNullOrWhiteSpace(firstname))
+            throw new DomainException(UserMessages.FirstnameRequired);
+
+        if (string.IsNullOrWhiteSpace(lastname))
+            throw new DomainException(UserMessages.LastnameRequired);
+
+        if (string.IsNullOrWhiteSpace(username))
+            throw new DomainException(UserMessages.UsernameRequired);
+        if (string.IsNullOrWhiteSpace(phone))
+            throw new DomainException(UserMessages.PhoneRequired);
+
         Firstname = firstname;
         Lastname = lastname;
         UserName = username;

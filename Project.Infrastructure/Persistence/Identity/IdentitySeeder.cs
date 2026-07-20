@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Roles;
 using Project.Domain.Enums;
 
 namespace Project.Infrastructure.Persistence.Identity;

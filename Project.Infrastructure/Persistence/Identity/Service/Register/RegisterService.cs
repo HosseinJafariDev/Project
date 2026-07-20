@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Project.Application.UseCases.Auth.Register;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Users;
 using Project.Domain.Enums;
 
 namespace Project.Infrastructure.Persistence.Identity.Service.Register;

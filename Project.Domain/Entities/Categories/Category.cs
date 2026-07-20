@@ -1,4 +1,7 @@
-namespace Project.Domain.Entities;
+using Project.Domain.Entities.ArticleCategories;
+using Project.Domain.Exceptions;
+
+namespace Project.Domain.Entities.Categories;
 
 public class Category
 {
@@ -15,6 +18,8 @@ public class Category
 
     public Category(int id, string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new DomainException(CategoryMessages.CategoryNameRequired);
         Id = id;
         Name = name;
     }

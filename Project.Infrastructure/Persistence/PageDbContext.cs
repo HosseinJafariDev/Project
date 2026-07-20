@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Categories;
+using Project.Domain.Entities.Roles;
+using Project.Domain.Entities.Users;
 
 namespace Project.Infrastructure.Persistence;
 

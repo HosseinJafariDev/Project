@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Project.Application.UseCases.Auth.Password;
 using Project.Domain.Entities;
+using Project.Domain.Entities.Users;
 
 namespace Project.Infrastructure.Persistence.Identity.Service.Password;
 

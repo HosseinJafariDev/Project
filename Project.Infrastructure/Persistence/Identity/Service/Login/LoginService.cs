@@ -1,6 +1,7 @@
 using Project.Application.UseCases.Auth.Login;
 using Project.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Project.Domain.Entities.Users;
 
 namespace Project.Infrastructure.Persistence.Identity.Service.Login;
 

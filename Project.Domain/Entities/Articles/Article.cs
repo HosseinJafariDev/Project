@@ -1,6 +1,9 @@
 using System.Reflection.Metadata;
+using Project.Domain.Entities.ArticleCategories;
+using Project.Domain.Entities.Users;
+using Project.Domain.Exceptions;
 
-namespace Project.Domain.Entities;
+namespace Project.Domain.Entities.Articles;
 
 public class Article
 {
@@ -22,6 +25,15 @@ public class Article
 
     public Article(long authorId, string title, string content)
     {
+        if (authorId <= 0)
+            throw new DomainException(ArticleMessages.InvalidAuthorId);
+
+        if (string.IsNullOrWhiteSpace(title))
+            throw new DomainException(ArticleMessages.TitleRequired);
+
+        if (string.IsNullOrWhiteSpace(content))
+            throw new DomainException(ArticleMessages.ContentRequired);
+
         AuthorId = authorId;
         Title = title;
         Content = content;
