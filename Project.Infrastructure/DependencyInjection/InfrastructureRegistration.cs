@@ -1,14 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using Project.Application.Interfaces.Persistence;
 using Project.Application.interfaces.Repository;
 using Project.Application.UseCases.Auth.Login;
 using Project.Application.UseCases.Auth.Logout;
 using Project.Application.UseCases.Auth.Password;
 using Project.Application.UseCases.Auth.Register;
+using Project.Infrastructure.Mongo;
 using Project.Infrastructure.Persistence;
 using Project.Infrastructure.Persistence.Identity;
+using Project.Infrastructure.Persistence.Identity.Options;
 using Project.Infrastructure.Persistence.Identity.Service.Login;
 using Project.Infrastructure.Persistence.Identity.Service.Logout;
 using Project.Infrastructure.Persistence.Identity.Service.Password;
@@ -25,6 +29,8 @@ public static class InfrastructureRegistration
         services.AddDbContext<PageDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
 
+        services.Configure<AdminOption>(configuration.GetSection("Admin"));
+
         #region IdentityService
 
         services.AddScoped<ILoginService, LoginService>();
@@ -40,6 +46,21 @@ public static class InfrastructureRegistration
 
         services.AddScoped<IRegisterService, RegisterService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        #endregion
+
+        #region Mongo
+
+        var connectionString =
+            configuration.GetConnectionString("MongoDb");
+
+        var client = new MongoClient(connectionString);
+
+        var database = client.GetDatabase("LogProject");
+
+        services.AddSingleton(database);
+
+        services.AddSingleton<MongoDbContext>();
 
         #endregion
 
