@@ -3,6 +3,9 @@ using Project.Application.UseCases.Auth.Login;
 using Project.Application.UseCases.Auth.Logout;
 using Project.Application.UseCases.Auth.Password;
 using Project.Application.UseCases.Auth.Register;
+using Project.Application.UseCases.Categories.DeleteCategory;
+using Project.Application.UseCases.Categories.EditCategory;
+using Project.Application.UseCases.Categories.GetCategory;
 
 namespace Project.Application.DependencyInjection;
 
@@ -14,6 +17,9 @@ public static class ApplicationRegistration
         services.AddScoped<ILogoutUseCase, LogoutUseCase>();
         services.AddScoped<IForgotPasswordUseCase, ForgotPasswordUseCase>();
         services.AddScoped<IRegisterUseCase, RegisterUseCase>();
+        services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
+        services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+        services.AddScoped<IEditCategoryUseCase, EditCategoryUseCase>();
         return services;
     }
 }

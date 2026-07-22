@@ -125,43 +125,7 @@ namespace Project.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Article", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AuthorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Articles", (string)null);
-                });
-
-            modelBuilder.Entity("Project.Domain.Entities.ArticleCategory", b =>
+            modelBuilder.Entity("Project.Domain.Entities.ArticleCategories.ArticleCategory", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +148,45 @@ namespace Project.Infrastructure.Persistence.Migrations
                     b.ToTable("ArticleCategories", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Articles.Article", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AuthorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Articles", (string)null);
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Categories.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,7 +195,9 @@ namespace Project.Infrastructure.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -205,7 +209,7 @@ namespace Project.Infrastructure.Persistence.Migrations
                     b.ToTable("Categories", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Role", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Roles.Role", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -223,7 +227,9 @@ namespace Project.Infrastructure.Persistence.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -243,7 +249,7 @@ namespace Project.Infrastructure.Persistence.Migrations
                     b.ToTable("Roles", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.User", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,7 +282,9 @@ namespace Project.Infrastructure.Persistence.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -331,7 +339,7 @@ namespace Project.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.Role", null)
+                    b.HasOne("Project.Domain.Entities.Roles.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -340,7 +348,7 @@ namespace Project.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.User", null)
+                    b.HasOne("Project.Domain.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -349,7 +357,7 @@ namespace Project.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.User", null)
+                    b.HasOne("Project.Domain.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,13 +366,13 @@ namespace Project.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.Role", null)
+                    b.HasOne("Project.Domain.Entities.Roles.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project.Domain.Entities.User", null)
+                    b.HasOne("Project.Domain.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -373,33 +381,22 @@ namespace Project.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.User", null)
+                    b.HasOne("Project.Domain.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Article", b =>
+            modelBuilder.Entity("Project.Domain.Entities.ArticleCategories.ArticleCategory", b =>
                 {
-                    b.HasOne("Project.Domain.Entities.User", "Author")
-                        .WithMany("Articles")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Project.Domain.Entities.ArticleCategory", b =>
-                {
-                    b.HasOne("Project.Domain.Entities.Article", "Article")
+                    b.HasOne("Project.Domain.Entities.Articles.Article", "Article")
                         .WithMany("ArticleCategories")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project.Domain.Entities.Category", "Category")
+                    b.HasOne("Project.Domain.Entities.Categories.Category", "Category")
                         .WithMany("ArticlesCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -410,17 +407,28 @@ namespace Project.Infrastructure.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Article", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Articles.Article", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.Users.User", "Author")
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Articles.Article", b =>
                 {
                     b.Navigation("ArticleCategories");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Categories.Category", b =>
                 {
                     b.Navigation("ArticlesCategories");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.User", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Users.User", b =>
                 {
                     b.Navigation("Articles");
                 });

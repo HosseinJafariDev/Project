@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Project.Page.Pages.Models;
+namespace Project.Page.Contracts;
 
 public class ParagraphResponse
 {

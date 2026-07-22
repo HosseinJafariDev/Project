@@ -1,0 +1,101 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.create-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.create-card{
+    width:450px;
+    background:#fff;
+    border-radius:15px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.create-card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#888;
+    margin-bottom:30px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    color:#444;
+    font-weight:bold;
+}
+
+.form-group input{
+    height:45px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:0 15px;
+    font-size:15px;
+    transition:.3s;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:#28a745;
+    box-shadow:0 0 8px rgba(40,167,69,.2);
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+}
+
+.btn-save{
+    flex:1;
+    height:45px;
+    background:#28a745;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.btn-save:hover{
+    background:#218838;
+}
+
+.btn-back{
+    flex:1;
+    height:45px;
+    background:#6c757d;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.btn-back:hover{
+    background:#545b62;
+}

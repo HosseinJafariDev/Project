@@ -57,13 +57,13 @@ var app = builder.Build();
 
 app.UseCustomExceptionHandler();
 
-using (var scope = app.Services.CreateScope())
-{
-    var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
-
-    await seeder.SeedRolesAsync();
-    await seeder.SeedAdminAsync();
-}
+// using (var scope = app.Services.CreateScope())
+// {
+//     var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+//
+//     await seeder.SeedRolesAsync();
+//     await seeder.SeedAdminAsync();
+// }
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -72,7 +72,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 app.UseHttpsRedirection();
 
 app.UseRouting();

@@ -1,0 +1,44 @@
+@page
+@model Project.Page.Pages.Admin.Index
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<div class="admin-dashboard">
+
+    <h1>پنل مدیریت</h1>
+
+    <p class="subtitle">
+        به پنل مدیریت خوش آمدید.
+    </p>
+
+    <div class="cards">
+
+        <a asp-page="/Admin/Categories/Index" class="card">
+
+            <div class="icon">📂</div>
+
+            <h2>مدیریت دسته‌بندی‌ها</h2>
+
+            <p>
+                ثبت، ویرایش، حذف و مشاهده دسته‌بندی‌های مقالات
+            </p>
+
+        </a>
+
+        <a asp-page="/Admin/Articles/Index" class="card">
+
+            <div class="icon">📝</div>
+
+            <h2>مدیریت مقالات</h2>
+
+            <p>
+                ثبت، ویرایش، حذف و مشاهده مقالات
+            </p>
+
+        </a>
+
+    </div>
+
+</div>

@@ -1,27 +1,54 @@
-@model List<Project.Page.Pages.Models.CategoryResponse>
-<div class="div-header">
+@model List<Project.Page.Contracts.CategoryResponse>
 
-    <div class="div-opshen">
-        <ul>
-            <li>خانه</li>
-            <li>دسته بندی مقالات
-                <ul>
+<header class="header">
+
+    <div class="header__logo">
+        <a asp-page="/Index">سبز مارکت</a>
+    </div>
+
+    <nav class="header__nav">
+
+        <ul class="menu">
+
+            <li class="menu__item">
+                <a asp-page="/Index">خانه</a>
+            </li>
+
+            <li class="menu__item menu__dropdown">
+
+                <span>دسته بندی مقالات</span>
+
+                <ul class="dropdown">
+
                     @foreach (var category in Model)
                     {
                         <li>
-                            @category.Name
+                            <a>
+                                @category.Name
+                            </a>
                         </li>
                     }
+
                 </ul>
+
             </li>
+
         </ul>
-    </div>
 
-    <div class="div-from">
-        <form asp-page="/Auth/Logout">
+    </nav>
+
+    <div class="header__actions">
+
+        <form asp-page="/Auth/Logout" method="post">
+
             @Html.AntiForgeryToken()
-            <button type="submit">Logout</button>
+
+            <button type="submit" class="btn-logout">
+                خروج
+            </button>
+
         </form>
+
     </div>
 
-</div>
+</header>

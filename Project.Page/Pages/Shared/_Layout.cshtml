@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>@ViewData["Title"] - Project.Page</title>
+    <title>@ViewData["Title"]</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="/css/IndexStyle.css" type="text/css" rel="stylesheet"/>
-    <link href="css/HeaderStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/HeaderStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/FooteStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/AdminIndexStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/AdminCategoriesIndexStyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/AdminCategoriesCreateStyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body style="margin: 0 0 0 0">
 <partial name="_Header"/>
-@RenderBody()
+
+<main class="main-content">
+
+    @RenderBody()
+
+</main>
+
 <partial name="_Footer"/>
 </body>
 </html>

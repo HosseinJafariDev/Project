@@ -2,5 +2,5 @@ namespace Project.Application.Interfaces.Persistence;
 
 public interface IUnitOfWork
 {
-    Task SaveChangesAsync();
+    Task SaveChangesAsync(CancellationToken cancellationToken);
 }

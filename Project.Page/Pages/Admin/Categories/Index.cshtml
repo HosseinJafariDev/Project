@@ -1,0 +1,127 @@
+@page
+@model Project.Page.Pages.Admin.Categories.Index
+
+@{
+    Layout = "Shared/_Layout";
+    ;
+}
+
+
+<div class="category-page">
+
+    <div class="page-header">
+
+        <h1>مدیریت دسته‌بندی‌ها</h1>
+
+        <a asp-page="/Admin/Categories/Create" class="btn-create">
+            + ثبت دسته‌بندی
+        </a>
+
+    </div>
+
+    <table class="category-table">
+
+        <thead>
+
+        <tr>
+
+            <th>ردیف</th>
+
+            <th>نام دسته‌بندی</th>
+
+            <th>عملیات</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+
+        <partial name="_CategoryTable" model="Model"/>
+
+        </tbody>
+
+    </table>
+    @Html.AntiForgeryToken()
+    <script>
+        $(document).on("submit", ".frm-delete", function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/Admin/Categories?handler=Delete",
+                method: "post",
+                data: $(this).serialize(),
+                success: function (html) {
+
+                    $("tbody").html(html);
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $(document).on("submit", ".frm-edit", function (e) {
+
+            e.preventDefault();
+
+            var row = $(this).closest("tr");
+
+            if (row.data("old-html"))
+                return;
+
+            // ذخیره HTML
+            row.data("old-html", row.html());
+
+            // ذخیره id
+            var id = row.find("input[name=id]").val();
+            row.data("id", id);
+
+            var td = row.find(".category-name");
+
+            var name = td.text().trim();
+
+            td.html(`<input type="text" class="txt-name" value="${name}" />`);
+
+            row.find("td").eq(2).html(`
+            <button type="button" class="btn-save">✔</button>
+            <button type="button" class="btn-cancel">✖</button>
+        `);
+        });
+
+
+        $(document).on("click", ".btn-cancel", function () {
+
+            var row = $(this).closest("tr");
+
+            row.html(row.data("old-html"));
+
+            row.removeData("old-html");
+
+        });
+
+        $(document).on("click", ".btn-save", function (e) {
+            e.preventDefault();
+            var row = $(this).closest("tr");
+
+            var id = row.data("id");
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            var name = row.find(".txt-name").val();
+
+            $.ajax({
+                url: "/Admin/Categories?handler=Edit",
+                method: "post",
+                data: {
+                    "CategoryRequest.Id": id,
+                    "CategoryRequest.Name": name,
+                    "__RequestVerificationToken": token
+                },
+                success: function (html) {
+                    $("tbody").html(html);
+
+                },
+            })
+        })
+    </script>
+
+</div>
+

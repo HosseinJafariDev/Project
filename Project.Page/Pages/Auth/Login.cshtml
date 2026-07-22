@@ -1,0 +1,62 @@
+@page
+@model Project.Page.Pages.Auth.Login
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به حساب کاربری</title>
+    <link rel="stylesheet" href="/css/LoginStyle.css" type="text/css">
+</head>
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h2>ورود به حساب</h2>
+        <p>لطفا اطلاعات خود را وارد کنید</p>
+
+        <form>
+
+            <div class="input-group">
+                <label>نام کاربری</label>
+                <input type="text" placeholder="نام کاربری">
+            </div>
+
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" placeholder="رمز عبور">
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox">
+                    مرا به خاطر بسپار
+                </label>
+
+                <a href="#">فراموشی رمز عبور</a>
+            </div>
+
+            <button type="submit">
+                ورود
+            </button>
+
+        </form>
+
+        <div class="register">
+            حساب کاربری ندارید؟
+            <a href="#">ثبت نام</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

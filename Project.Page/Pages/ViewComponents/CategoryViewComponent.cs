@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
+using Project.Application.UseCases.Categories.GetCategory;
+using Project.Page.Mappers;
 
 namespace Project.Page.Pages.ViewComponents;
 
-public class CategoryViewComponent : ViewComponent
+public class CategoryViewComponent(IGetAllCategoriesUseCase getAllCategoriesUseCase) : ViewComponent
 {
-    public IViewComponentResult InvokeResult()
+    public async Task<IViewComponentResult> InvokeAsync()
     {
-        return View();
+        var cancellationToken = HttpContext.RequestAborted;
+
+        var categoriesDto = await getAllCategoriesUseCase.ExecuteAsync(cancellationToken);
+
+        var categoriesResponse = categoriesDto.ToCategoriesResponse();
+
+        return View(categoriesResponse);
     }
 }

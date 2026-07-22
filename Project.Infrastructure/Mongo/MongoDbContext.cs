@@ -5,12 +5,12 @@ namespace Project.Infrastructure.Mongo;
 
 public class MongoDbContext(IMongoDatabase database)
 {
-    public IMongoCollection<LogDocument> Products
+    public IMongoCollection<LogDocument> Logs
     {
         get
         {
             return database
-                .GetCollection<LogDocument>("Products");
+                .GetCollection<LogDocument>("Log");
         }
     }
 }

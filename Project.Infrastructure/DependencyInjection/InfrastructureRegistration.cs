@@ -5,11 +5,13 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Project.Application.Interfaces.Persistence;
 using Project.Application.interfaces.Repository;
+using Project.Application.Interfaces.Service;
 using Project.Application.UseCases.Auth.Login;
 using Project.Application.UseCases.Auth.Logout;
 using Project.Application.UseCases.Auth.Password;
 using Project.Application.UseCases.Auth.Register;
 using Project.Infrastructure.Mongo;
+using Project.Infrastructure.Mongo.Service;
 using Project.Infrastructure.Persistence;
 using Project.Infrastructure.Persistence.Identity;
 using Project.Infrastructure.Persistence.Identity.Options;
@@ -61,6 +63,7 @@ public static class InfrastructureRegistration
         services.AddSingleton(database);
 
         services.AddSingleton<MongoDbContext>();
+        services.AddScoped<ILogService, LogService>();
 
         #endregion
 

@@ -4,9 +4,8 @@ namespace Project.Page.Pages.ViewComponents;
 
 public class ArticleViewComponent : ViewComponent
 {
-    public IViewComponentResult InvokeAsync()
+    public IViewComponentResult Invoke()
     {
-        
         return View();
     }
 }

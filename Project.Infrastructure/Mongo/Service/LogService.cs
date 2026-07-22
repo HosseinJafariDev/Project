@@ -4,7 +4,7 @@ using Project.Infrastructure.Mongo.Documents;
 
 namespace Project.Infrastructure.Mongo.Service;
 
-public class LogService(IMongoCollection<LogDocument> collection) : ILogService
+public class LogService(MongoDbContext context) : ILogService
 {
     public async Task LogAsync(Exception exception)
     {
@@ -17,6 +17,6 @@ public class LogService(IMongoCollection<LogDocument> collection) : ILogService
             CreatedAt = DateTime.UtcNow
         };
 
-        await collection.InsertOneAsync(document);
+        await context.Logs.InsertOneAsync(document);
     }
 }

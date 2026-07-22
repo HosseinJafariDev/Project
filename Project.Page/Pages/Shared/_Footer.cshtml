@@ -1,3 +1,36 @@
-<footer>
-    
+<footer class="footer">
+
+    <div class="footer__container">
+
+        <div class="footer__left">
+            <h3>My Blog</h3>
+            <p>
+                بستری برای انتشار مقالات آموزشی و به اشتراک‌گذاری دانش.
+            </p>
+        </div>
+
+        <div class="footer__center">
+            <h4>دسترسی سریع</h4>
+
+            <ul>
+                <li><a asp-page="/Index">خانه</a></li>
+                <li><a asp-page="/Articles">مقالات</a></li>
+                <li><a asp-page="/About">درباره ما</a></li>
+                <li><a asp-page="/Contact">تماس با ما</a></li>
+            </ul>
+        </div>
+
+        <div class="footer__right">
+            <h4>ارتباط با ما</h4>
+
+            <p>Email : info@example.com</p>
+            <p>Phone : +98 912 000 0000</p>
+        </div>
+
+    </div>
+
+    <div class="footer__bottom">
+        © @DateTime.Now.Year تمامی حقوق محفوظ است.
+    </div>
+
 </footer>

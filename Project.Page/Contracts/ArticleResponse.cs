@@ -1,4 +1,6 @@
-namespace Project.Page.Pages.Models;
+using Project.Page.Contracts;
+
+namespace Project.Page.Contracts;
 
 public class ArticleResponse
 {

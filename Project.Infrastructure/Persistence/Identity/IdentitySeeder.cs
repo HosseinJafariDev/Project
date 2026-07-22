@@ -36,7 +36,7 @@ public class IdentitySeeder(RoleManager<Role> roleManager, UserManager<User> use
             return;
 
         admin = new User(options.Value.Firstname, options.Value.Lastname, options.Value.Username,
-            options.Value.Password);
+            options.Value.Phone);
 
         await userManager.CreateAsync(admin, options.Value.Password);
         await userManager.AddToRoleAsync(admin, nameof(Roles.Admin));

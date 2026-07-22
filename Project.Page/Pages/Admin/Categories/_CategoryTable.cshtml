@@ -1,0 +1,40 @@
+@{
+    var row = 1;
+}
+
+@if (Model.CategoriesList != null)
+{
+    @foreach (var category in Model.CategoriesList)
+    {
+        <tr>
+
+            <td>@row</td>
+
+            <td class="category-name">@category.Name </td>
+
+
+            <td>
+                <form class="frm-edit" method="post">
+                    <input type="hidden" name="id" value="@category.Id"/>
+                    <button type="submit" class="btn-edit">
+                        ویرایش
+                    </button>
+                </form>
+
+                <form class="frm-delete" method="post">
+                    <input type="hidden" name="id" value="@category.Id"/>
+                    <input type="hidden" name="Name" value="@category.Name"/>
+                    <button type="submit" class="btn-delete">
+                        حذف
+                    </button>
+
+                </form>
+
+
+            </td>
+
+        </tr>
+
+        row++;
+    }
+}
