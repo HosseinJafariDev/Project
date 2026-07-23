@@ -8,7 +8,6 @@ using Project.Infrastructure.Persistence.Identity;
 using Project.Page.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-//kkkkkkkkkkkkkkkkkkkkkkk
 // Add services to the container.
 builder.Services.AddRazorPages();
 
