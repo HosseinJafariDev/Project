@@ -1,7 +1,9 @@
+using Project.Application.UseCases.Categories.CreateCategory;
 using Project.Application.UseCases.Categories.DeleteCategory;
 using Project.Application.UseCases.Categories.EditCategory;
 using Project.Application.UseCases.Categories.GetCategory;
 using Project.Page.Contracts;
+using Project.Page.Contracts.Categoties;
 
 namespace Project.Page.Mappers;
 
@@ -32,6 +34,14 @@ public static class CategoryContractMappings
         return new EditCategoryInputDto
         {
             Id = categoryRequest.Id,
+            Name = categoryRequest.Name
+        };
+    }
+
+    public static CreateCategoryInputDto ToCreateCategoryInputDto(this CategoryCreateRequest categoryRequest)
+    {
+        return new CreateCategoryInputDto
+        {
             Name = categoryRequest.Name
         };
     }

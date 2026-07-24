@@ -5,28 +5,46 @@
     Layout = "Shared/_Layout";
 }
 
-<div class="create-container">
+<div class="create-container" xmlns="http://www.w3.org/1999/html">
 
     <div class="create-card">
-
         <h2>ثبت دسته‌بندی جدید</h2>
         <p class="subtitle">اطلاعات دسته‌بندی را وارد کنید.</p>
+        <form id="frm-sub-add" method="post">
+            <div class="form-group">
+                <label>نام دسته‌بندی</label>
+                <input id="txt-name" type="text" placeholder="علمی"
+                       asp-for="CategoryCreateRequest.Name">
+            </div>
 
-        <div class="form-group">
-            <label>نام دسته‌بندی</label>
-            <input type="text" placeholder="مثلاً سبزیجات">
-        </div>
+            <div class="buttons">
+                <button class="btn-save" type="submit">
+                    ثبت دسته بندی
+                </button>
 
-        <div class="buttons">
-            <button class="btn-save">
-                ثبت دسته‌بندی
-            </button>
-
-            <button class="btn-back">
-                بازگشت
-            </button>
-        </div>
+                <a asp-page="/Admin/Categories/Index">
+                    بازگشت
+                </a>
+            </div>
+        </form>
 
     </div>
-
 </div>
+<script>
+    $("#frm-sub-add").submit(function (e) {
+        e.preventDefault();
+        console.log($("#frm-sub-add").serialize());
+        $.ajax({
+            url: "/Admin/Categories/Create?handler=Create",
+            method: "POST",
+            data: $("#frm-sub-add").serialize(),
+            success: function (result) {
+                if (result) {
+                    alert("ثبت شد")
+                    $("#txt-name").val("");
+                }
+            }
+
+        })
+    })
+</script>

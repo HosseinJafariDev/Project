@@ -56,13 +56,13 @@ var app = builder.Build();
 
 app.UseCustomExceptionHandler();
 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
-//
-//     await seeder.SeedRolesAsync();
-//     await seeder.SeedAdminAsync();
-// }
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+
+    await seeder.SeedRolesAsync();
+    await seeder.SeedAdminAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -3,6 +3,7 @@ using Project.Application.UseCases.Auth.Login;
 using Project.Application.UseCases.Auth.Logout;
 using Project.Application.UseCases.Auth.Password;
 using Project.Application.UseCases.Auth.Register;
+using Project.Application.UseCases.Categories.CreateCategory;
 using Project.Application.UseCases.Categories.DeleteCategory;
 using Project.Application.UseCases.Categories.EditCategory;
 using Project.Application.UseCases.Categories.GetCategory;
@@ -20,6 +21,7 @@ public static class ApplicationRegistration
         services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
         services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
         services.AddScoped<IEditCategoryUseCase, EditCategoryUseCase>();
+        services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
         return services;
     }
 }

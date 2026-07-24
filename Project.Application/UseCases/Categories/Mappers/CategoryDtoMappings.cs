@@ -1,3 +1,4 @@
+using Project.Application.UseCases.Categories.CreateCategory;
 using Project.Application.UseCases.Categories.DeleteCategory;
 using Project.Application.UseCases.Categories.EditCategory;
 using Project.Application.UseCases.Categories.GetCategory;
@@ -26,5 +27,10 @@ public static class CategoryDtoMappings
     public static Category ToCategory(this EditCategoryInputDto input)
     {
         return new Category(input.Id, input.Name!);
+    }
+
+    public static Category ToCategory(this CreateCategoryInputDto input)
+    {
+        return new Category(0, input.Name!);
     }
 }
