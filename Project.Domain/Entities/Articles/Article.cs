@@ -16,12 +16,12 @@ public class Article
     public string? Title { get; private set; }
     public string? Content { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
-    public bool IsDeleted { get; private set; } = false;
+    public DateTime? UpdatedAt { get; private set; }
+    public bool IsDeleted { get; private set; }
     private readonly List<ArticleCategory> _list = [];
 
     public User? Author { get; private set; }
-    public IReadOnlyCollection<ArticleCategory>? ArticleCategories => _list.AsReadOnly();
+    public IReadOnlyCollection<ArticleCategory> ArticleCategories => _list;
 
     public Article(long authorId, string title, string content)
     {

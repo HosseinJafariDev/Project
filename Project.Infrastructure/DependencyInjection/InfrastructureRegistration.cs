@@ -48,6 +48,7 @@ public static class InfrastructureRegistration
 
         services.AddScoped<IRegisterService, RegisterService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IArticleRepository, ArticleRepository>();
 
         #endregion
 

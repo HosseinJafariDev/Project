@@ -4,8 +4,7 @@ namespace Project.Page.Pages.Admin.Articles;
 
 public class Edit : PageModel
 {
-    public void OnGet()
+    public void OnGet(long id)
     {
-        
     }
 }

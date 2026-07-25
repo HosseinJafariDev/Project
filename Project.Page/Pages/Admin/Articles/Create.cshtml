@@ -2,18 +2,114 @@
 @model Project.Page.Pages.Admin.Articles.Create
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
 }
 
-<!DOCTYPE html>
+<div class="article-create-page">
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+    <div class="article-create-card">
+
+        <h1>ثبت مقاله جدید</h1>
+
+        <p class="subtitle">
+            اطلاعات مقاله را وارد کنید.
+        </p>
+
+        <form id="frm-sub" method="post">
+
+            <div class="form-group">
+
+                <label>عنوان مقاله</label>
+
+                <input type="text"
+                       name="Title"
+                       class="form-control"
+                       placeholder="عنوان مقاله..."/>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>دسته بندی ها</label>
+
+                <div class="category-list">
+
+                    @foreach (var category in Model.CategoriesList)
+                    {
+                        <label class="category-item">
+
+                            <input type="checkbox"
+                                   name="CategoryIds"
+                                   value="@category.Id"/>
+
+                            <span>@category.Name</span>
+
+                        </label>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>متن مقاله</label>
+
+                <textarea id="content"
+                          name="Content"
+                          class="form-control article-content"
+                          rows="12">
+                </textarea>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button type="submit" class="btn-save">
+                    ثبت مقاله
+                </button>
+
+                <a asp-page="/Admin/Articles/Index"
+                   class="btn-back">
+                    بازگشت
+                </a>
+
+            </div>
+
+        </form>
+
+        <script>
+            let editor;
+
+            ClassicEditor
+                .create(document.querySelector('#content'))
+                .then(newEditor => {
+                    editor = newEditor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+
+        <script>
+            $(document).on("submit", "#frm-sub", function (e) {
+                e.preventDefault();
+                $("textarea[name='Content']").val(editor.getData());        
+                $.ajax({
+                    url: "/Admin/Articles/Create",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result) {
+                            alert("ثبت شد")
+                        }
+                    }
+                })
+            })
+        </script>
+    </div>
+
 </div>
-</body>
-</html>

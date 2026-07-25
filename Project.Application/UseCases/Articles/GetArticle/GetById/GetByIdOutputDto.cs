@@ -1,8 +1,8 @@
-using Project.Page.Contracts;
+using Project.Application.UseCases.Categories.GetCategory;
 
-namespace Project.Page.Contracts;
+namespace Project.Application.UseCases.Articles.GetArticle.GetById;
 
-public class ArticleResponse
+public class GetByIdOutputDto
 {
     public long Id { get; set; }
     public long AuthorId { get; set; }
@@ -10,5 +10,5 @@ public class ArticleResponse
     public string? Content { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public List<CategoryResponse> Categories { get; set; } = null!;
+    public List<GetAllCategoriesOutputDto> Categories { get; set; } = null!;
 }

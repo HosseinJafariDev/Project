@@ -1,0 +1,148 @@
+.article-page {
+    width: 90%;
+    max-width: 1400px;
+    margin: 40px auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 30px;
+    color: #2d3748;
+}
+
+.btn-create {
+    text-decoration: none;
+    background: #28a745;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.btn-create:hover {
+    background: #218838;
+}
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.article-table thead {
+    background: #198754;
+    color: white;
+}
+
+.article-table th {
+    padding: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.article-table td {
+    padding: 16px;
+    border-bottom: 1px solid #ececec;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.article-table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.article-table tbody tr:hover {
+    background: #eef9f2;
+}
+
+.article-summary {
+    max-width: 350px;
+    text-align: justify;
+    line-height: 1.8;
+    color: #555;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.frm-delete {
+    margin: 0;
+}
+
+.btn-edit,
+.btn-delete {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 9px 18px;
+    border-radius: 7px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .25s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-edit {
+    background: #0d6efd;
+}
+
+.btn-edit:hover {
+    background: #0b5ed7;
+}
+
+.btn-delete {
+    background: #dc3545;
+}
+
+.btn-delete:hover {
+    background: #bb2d3b;
+}
+
+.article-table td:nth-child(2) {
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.article-table td:nth-child(4) {
+    color: #198754;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+
+    .article-page {
+        width: 98%;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .article-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}

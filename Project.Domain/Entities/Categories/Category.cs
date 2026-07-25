@@ -14,7 +14,7 @@ public class Category
     public bool IsDeleted { get; private set; } = false;
     private readonly List<ArticleCategory> _articleCategories = [];
 
-    public IReadOnlyCollection<ArticleCategory>? ArticlesCategories => _articleCategories.AsReadOnly();
+    public IReadOnlyCollection<ArticleCategory>? ArticlesCategories => _articleCategories;
 
     public Category(int id, string name)
     {

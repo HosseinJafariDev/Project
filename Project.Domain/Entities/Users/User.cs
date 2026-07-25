@@ -14,7 +14,7 @@ public class User : IdentityUser<long>
     public bool IsDeleted { get; private set; } = false;
     private readonly List<Article> _list = [];
 
-    public IReadOnlyCollection<Article> Articles => _list.AsReadOnly();
+    public IReadOnlyCollection<Article> Articles => _list;
 
     private User()
     {

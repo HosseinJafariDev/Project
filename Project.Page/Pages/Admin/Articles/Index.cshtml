@@ -2,18 +2,121 @@
 @model Project.Page.Pages.Admin.Articles.Index
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
 }
 
-<!DOCTYPE html>
+<div class="article-page">
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+    <div class="page-header">
+
+        <h1>مدیریت مقالات</h1>
+
+        <a asp-page="Create" class="btn-create">
+            + ثبت مقاله
+        </a>
+
+    </div>
+
+    <table class="article-table">
+
+        <thead>
+
+        <tr>
+
+            <th>ردیف</th>
+            <th>عنوان مقاله</th>
+            <th>خلاصه</th>
+            <th>دسته‌بندی</th>
+            <th>تاریخ ثبت</th>
+            <th>تاریخ ویرایش</th>
+            <th>عملیات</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        @{
+            var row = 1;
+        }
+
+        @foreach (var article in Model.Articles)
+        {
+            <tr>
+
+                <td>
+                    @row
+                </td>
+
+                <td>
+                    @article.Title
+                </td>
+
+                <td class="article-summary">
+
+                    @{
+                        var summary = article.Content.Length > 80
+                            ? article.Content.Substring(0, 80) + "..."
+                            : article.Content;
+                    }
+
+                    @summary
+
+                </td>
+
+                <td>
+
+                    @string.Join(" | ", article.Categories.Select(c => c.Name))
+
+                </td>
+
+                <td>
+
+                    @article.CreatedAt.ToString("yyyy/MM/dd")
+
+                </td>
+
+                <td>
+
+                    @(article.UpdatedAt.HasValue
+                        ? article.UpdatedAt.Value.ToString("yyyy/MM/dd")
+                        : "-")
+
+                </td>
+
+                <td class="actions">
+
+                    <a asp-page="Edit"
+                       asp-route-id="@article.Id"
+                       class="btn-edit">
+                        ویرایش
+                    </a>
+
+                    <form class="frm-delete" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="Id"
+                               value="@article.Id"/>
+
+                        <button type="submit"
+                                class="btn-delete">
+                            حذف
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            row++;
+        }
+
+        </tbody>
+
+    </table>
+
 </div>
-</body>
-</html>

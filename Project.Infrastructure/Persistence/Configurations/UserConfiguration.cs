@@ -40,5 +40,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(x => x.IsDeleted)
             .HasDefaultValue(false);
+
+        builder.Metadata
+            .FindNavigation(nameof(User.Articles))!
+            .SetField("_list");
+
+        builder.Navigation(x => x.Articles)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

@@ -29,5 +29,12 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder
             .Property(x => x.IsDeleted)
             .HasDefaultValue(false);
+
+        builder.Metadata
+            .FindNavigation(nameof(Category.ArticlesCategories))!
+            .SetField("_articleCategories");
+
+        builder.Navigation(x => x.ArticlesCategories)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

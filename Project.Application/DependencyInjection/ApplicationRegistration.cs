@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Project.Application.UseCases.Articles.GetArticle;
+using Project.Application.UseCases.Articles.GetArticle.GetById;
 using Project.Application.UseCases.Auth.Login;
 using Project.Application.UseCases.Auth.Logout;
 using Project.Application.UseCases.Auth.Password;
@@ -22,6 +24,11 @@ public static class ApplicationRegistration
         services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
         services.AddScoped<IEditCategoryUseCase, EditCategoryUseCase>();
         services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
+        services.AddScoped<IGetAllArticleUseCase, GetAllArticleUseCase>();
+        services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
+        services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+        services.AddScoped<IEditCategoryUseCase, EditCategoryUseCase>();
+        services.AddScoped<IGetByIdUseCase, GetByIdUseCase>();
         return services;
     }
 }
