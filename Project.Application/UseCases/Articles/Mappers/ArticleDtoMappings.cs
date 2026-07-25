@@ -48,6 +48,7 @@ public static class ArticleDtoMappings
     public static Article ToArticle(this UpdateArticleInputDto articleInputDto)
     {
         var article = new Article(articleInputDto.AuthorId, articleInputDto.Title!, articleInputDto.Content!);
+        article.CreatedAted(articleInputDto.CreateAt);
         foreach (var item in articleInputDto.Categories)
         {
             article.AddCategory(item.Id);

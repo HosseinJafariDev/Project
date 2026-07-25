@@ -29,4 +29,9 @@ public abstract class RepositoryBase<TEntity, TKey>(PageDbContext context)
     {
         DbSet.Update(entity);
     }
+
+    public virtual void Remove(TEntity entity)
+    {
+        DbSet.Remove(entity);
+    }
 }

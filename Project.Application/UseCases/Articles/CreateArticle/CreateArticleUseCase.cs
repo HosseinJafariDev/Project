@@ -8,13 +8,21 @@ public class CreateArticleUseCase(IArticleRepository articleRepository, IUnitOfW
 {
     public async Task<bool> ExecuteAsync(CreateArticleInputDto articleInputDto, CancellationToken cancellationToken)
     {
-        var article = articleInputDto.ToArticle();
-        article.CreatedAted(DateTime.Now);
+        try
+        {
+            var article = articleInputDto.ToArticle();
+            article.CreatedAted(DateTime.Now);
 
-        articleRepository.Add(article);
+            articleRepository.Add(article);
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return true;
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

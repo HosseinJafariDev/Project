@@ -41,7 +41,7 @@ public class Article
 
     public void AddCategory(int categoryId)
     {
-        var item = new ArticleCategory(categoryId, Id);
+        var item = new ArticleCategory(0, categoryId, Id);
         _list.Add(item);
     }
 
@@ -50,10 +50,15 @@ public class Article
         CreatedAt = createdAt;
     }
 
-    public void UpdatedAted(DateTime updatedAt)
+    public void UpdatedAted(long id, DateTime? updatedAt)
     {
+        Id = id;
         UpdatedAt = updatedAt;
     }
 
-    public void Delete() => IsDeleted = true;
+    public void Delete(long id)
+    {
+        IsDeleted = true;
+        Id = id;
+    }
 }

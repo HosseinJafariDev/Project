@@ -12,4 +12,10 @@ public class ArticleRepository(PageDbContext context) : RepositoryBase<Article, 
             .Where(x => x.IsDeleted == false).AsNoTracking()
             .ToListAsync(cancellationToken);
     }
+
+    public override async Task<Article?> GetByIdAsync(long id, CancellationToken cancellationToken)
+    {
+        return await DbSet.Include(x => x.ArticleCategories).ThenInclude(x => x.Category).AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+    }
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Project.Application.UseCases.Articles.CreateArticle;
@@ -23,6 +24,9 @@ public class Create(IGetAllCategoriesUseCase getAllCategoriesUseCase, ICreateArt
 
     public async Task<JsonResult> OnPostAsync(CancellationToken cancellationToken)
     {
+        /*var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        CreateArticleRequest.AuthorId = long.Parse(userId!);*/
+        CreateArticleRequest.AuthorId = 1;
         var result =
             await createArticleUseCase.ExecuteAsync(CreateArticleRequest.ToArticleInputDto(), cancellationToken);
         return new JsonResult(result);

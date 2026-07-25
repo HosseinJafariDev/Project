@@ -8,5 +8,6 @@ public class UpdateArticleInputDto
     public long AuthorId { get; set; }
     public string? Title { get; set; }
     public string? Content { get; set; }
+    public DateTime CreateAt { get; set; }
     public List<GetAllCategoriesOutputDto> Categories { get; set; } = null!;
 }

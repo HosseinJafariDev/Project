@@ -1,8 +1,6 @@
-using Project.Application.UseCases.Categories.GetCategory;
+namespace Project.Page.Contracts.Article;
 
-namespace Project.Application.UseCases.Articles.DeleteArticle;
-
-public class DeleteArticleInputDto
+public class ArticleDeleteRequest
 {
     public long Id { get; set; }
     public long AuthorId { get; set; }

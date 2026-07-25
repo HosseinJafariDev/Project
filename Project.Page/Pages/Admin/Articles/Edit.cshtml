@@ -1,19 +1,178 @@
-@page   "{id:int}"
+@page "{id:long}"
+@using Project.Page.Contracts
 @model Project.Page.Pages.Admin.Articles.Edit
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
 }
 
-<!DOCTYPE html>
+<div class="article-create-page">
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
+    <div class="article-create-card">
+
+        <h1>ویرایش مقاله</h1>
+
+        <p class="subtitle">
+            اطلاعات مقاله را ویرایش کنید.
+        </p>
+
+
+        <form id="frm-sub" method="post">
+
+
+            <input type="hidden"
+                   asp-for="ArticleUpdateRequest.Id"
+                   value="@Model.ArticleResponse.Id"/>
+
+            <input type="hidden"
+                   asp-for="ArticleUpdateRequest.CreateAt"
+                   value="@Model.ArticleResponse.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss")"/>
+
+
+            <div class="form-group">
+
+                <label>عنوان مقاله</label>
+
+                <input type="text"
+                       name="ArticleUpdateRequest.Title"
+                       class="form-control"
+                       value="@Model.ArticleResponse.Title"
+                       placeholder="عنوان مقاله..."/>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>دسته بندی ها</label>
+
+                <div class="category-list">
+
+                    @foreach (var category in Model.ArticleResponse.Categories)
+                    {
+                        <label class="category-item">
+
+
+                            <input type="checkbox"
+                                   name="ArticleUpdateRequest.Categoies"    
+                                   value="@category.Id"
+                                   @(Model.ArticleResponse.Categories.Any(x => x.Id == category.Id)
+                                       ? "checked"
+                                       : "")/>
+
+
+                            <span>
+                                @category.Name
+                            </span>
+
+
+                        </label>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>متن مقاله</label>
+
+
+                <textarea id="content"
+                          name="ArticleUpdateRequest.Content"
+                          class="form-control article-content"
+                          rows="12">@Model.ArticleResponse.Content</textarea>
+
+
+            </div>
+
+
+            <div class="buttons">
+
+
+                <button type="submit" class="btn-save">
+                    ویرایش مقاله
+                </button>
+
+
+                <a asp-page="/Admin/Articles/Index"
+                   class="btn-back">
+
+                    بازگشت
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+        <script>
+
+            let editor;
+
+
+            ClassicEditor
+                .create(document.querySelector('#content'))
+                .then(newEditor => {
+
+                    editor = newEditor;
+
+                })
+                .catch(error => {
+
+                    console.error(error);
+
+                });
+
+
+        </script>
+
+
+        <script>
+
+            $(document).on("submit", "#frm-sub", function (e) {
+
+
+                e.preventDefault();
+
+
+                $("textarea[name='ArticleUpdateRequest.Content']")
+                    .val(editor.getData());
+
+
+                $.ajax({
+
+                    url: "/Admin/Articles/Edit/" + @Model.ArticleResponse.Id,
+
+                    type: "POST",
+
+                    data: $(this).serialize(),
+
+
+                    success: function (result) {
+
+
+                        if (result) {
+                            alert("ویرایش شد");
+                        }
+
+
+                    }
+
+
+                });
+
+
+            });
+
+
+        </script>
+
+
+    </div>
 
 </div>
-</body>
-</html>

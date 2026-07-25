@@ -6,4 +6,5 @@ public interface IRepository<TEntity, in TKey> where TEntity : class
     Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken);
     void Add(TEntity entity);
     void Update(TEntity entity);
+    void Remove(TEntity entity);
 }

@@ -10,7 +10,9 @@ public class DeleteArticleUseCase(IArticleRepository articleRepository, IUnitOfW
     public async Task<bool> ExecuteAsync(DeleteArticleInputDto articleInputDto, CancellationToken cancellationToken)
     {
         var article = articleInputDto.ToArticle();
-        article.Delete();
+        article.Delete(articleInputDto.Id);
+        article.CreatedAted(articleInputDto.CreatedAt);
+        article.UpdatedAted(articleInputDto.Id, articleInputDto.UpdatedAt);
         articleRepository.Update(article);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return true;

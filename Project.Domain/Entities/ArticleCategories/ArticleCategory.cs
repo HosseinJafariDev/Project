@@ -16,14 +16,11 @@ public class ArticleCategory
     public Article? Article { get; private set; }
     public Category? Category { get; private set; }
 
-    public ArticleCategory(int categoryId, long articleId)
+    public ArticleCategory(long id, int categoryId, long articleId)
     {
-        if (articleId <= 0)
-            throw new DomainException(ArticleCategoryMessages.InvalidArticleCategoryId);
-
         if (categoryId <= 0)
             throw new DomainException(ArticleCategoryMessages.InvalidArticleId);
-
+        Id = id;
         ArticleId = articleId;
         CategoryId = categoryId;
     }

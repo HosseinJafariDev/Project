@@ -56,9 +56,11 @@
                 <td class="article-summary">
 
                     @{
-                        var summary = article.Content.Length > 80
-                            ? article.Content.Substring(0, 80) + "..."
-                            : article.Content;
+                        var plainText = Regex.Replace(article.Content, "<.*?>", "");
+
+                        var summary = plainText.Length > 80
+                            ? plainText.Substring(0, 80) + "..."
+                            : plainText;
                     }
 
                     @summary
@@ -101,6 +103,32 @@
                                name="Id"
                                value="@article.Id"/>
 
+                        <input type="hidden"
+                               name="AuthorId"
+                               value="@article.AuthorId"/>
+
+                        <input type="hidden"
+                               name="Title"
+                               value="@article.Title"/>
+
+                        <input type="hidden"
+                               name="Content"
+                               value="@article.Content"/>
+
+                        <input type="hidden"
+                               name="CreatedAt"
+                               value="@article.CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss")"/>
+
+                        <input type="hidden"
+                               name="UpdatedAt"
+                               value="@(article.UpdatedAt.HasValue
+                                          ? article.UpdatedAt.Value.ToString("yyyy-MM-ddTHH:mm:ss")
+                                          : "")"/>
+
+                        <input type="hidden"
+                               name="Categories"
+                               value="@article.Categories"/>
+
                         <button type="submit"
                                 class="btn-delete">
                             حذف
@@ -108,15 +136,37 @@
 
                     </form>
 
+
                 </td>
 
             </tr>
 
             row++;
         }
-
+    
         </tbody>
 
     </table>
 
+
 </div>
+
+<script>
+    $(".frm-delete").submit(function (e) {
+        e.preventDefault();
+        if (!confirm("آیا از حذف این مقاله مطمئن هستید؟"))
+            return;
+        var form = $(this);
+        $.ajax({
+            url: "/Admin/Articles?handler=Delete",
+            method: "post",
+            data: form.serialize(),
+            success: function (data) {
+                if (data) {
+                    form.closest("tr").remove();
+                    alert("حذف شد")
+                }
+            }
+        })
+    })
+</script>
