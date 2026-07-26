@@ -22,25 +22,25 @@
         <h2>ورود به حساب</h2>
         <p>لطفا اطلاعات خود را وارد کنید</p>
 
-        <form>
-
+        <form id="frm-login" method="post">
+            @Html.AntiForgeryToken()
             <div class="input-group">
                 <label>نام کاربری</label>
-                <input type="text" placeholder="نام کاربری">
+                <input type="text" placeholder="نام کاربری" asp-for="LoginRequest.Username">
             </div>
 
             <div class="input-group">
                 <label>رمز عبور</label>
-                <input type="password" placeholder="رمز عبور">
+                <input type="password" placeholder="رمز عبور" asp-for="LoginRequest.Password">
             </div>
 
             <div class="options">
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" asp-for="LoginRequest.RememberMe">
                     مرا به خاطر بسپار
                 </label>
 
-                <a href="#">فراموشی رمز عبور</a>
+                <a href="/Auth/ForgotPassword">فراموشی رمز عبور</a>
             </div>
 
             <button type="submit">
@@ -48,10 +48,29 @@
             </button>
 
         </form>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+            $("#frm-login").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/Auth/Login",
+                    method: "post",
+                    data: $("#frm-login").serialize(),
+                    success:
+                        function (result) {
+                            if (result.success) {
+                                window.location.href = "/Index";
+                            } else {
+                                alert(result.message)
+                            }
+                        },
+                })
 
+            })
+        </script>
         <div class="register">
             حساب کاربری ندارید؟
-            <a href="#">ثبت نام</a>
+            <a href="/Auth/SignUp">ثبت نام</a>
         </div>
 
     </div>

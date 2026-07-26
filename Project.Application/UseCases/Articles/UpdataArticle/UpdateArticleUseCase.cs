@@ -20,11 +20,8 @@ public class UpdateArticleUseCase(
         {
             foreach (var item in article.ArticleCategories)
             {
-                if (item.CategoryId == artic.CategoryId)
-                {
-                    articleCategoryRepository.Remove(new ArticleCategory(artic.Id,artic.CategoryId, artic.ArticleId));
-                    await unitOfWork.SaveChangesAsync(cancellationToken);
-                }
+                articleCategoryRepository.Remove(new ArticleCategory(artic.Id, artic.CategoryId, artic.ArticleId));
+                await unitOfWork.SaveChangesAsync(cancellationToken);
             }
         }
 

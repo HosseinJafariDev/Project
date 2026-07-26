@@ -48,13 +48,13 @@
 
                 <div class="category-list">
 
-                    @foreach (var category in Model.ArticleResponse.Categories)
+                    @foreach (var category in Model.CategoriesList)
                     {
                         <label class="category-item">
 
 
                             <input type="checkbox"
-                                   name="ArticleUpdateRequest.Categoies"    
+                                   name="ArticleUpdateRequest.Categoies"
                                    value="@category.Id"
                                    @(Model.ArticleResponse.Categories.Any(x => x.Id == category.Id)
                                        ? "checked"

@@ -42,19 +42,31 @@ builder.Services.AddIdentity<User, Role>(options =>
     .AddEntityFrameworkStores<PageDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => { policy.RequireRole("Admin"); });
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
     //اگر لاکین نکرده باشد هدایت میشود به این صفحه 
-    options.LoginPath = "/Auth/LoginAjax";
+    options.LoginPath = "/Auth/Login";
     //اگر لاگین کرده باشه و دسرسی نداشته باشه میاد به این صفحه 
     options.AccessDeniedPath = "/AccessDenied";
 });
 
 
 var app = builder.Build();
-
 app.UseCustomExceptionHandler();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    await SqlDatabaseInitializer.InitializeAsync(services);
+    await MongoDatabaseInitializer.InitializeAsync(services);
+}
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -65,20 +77,21 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
+// if (!app.Environment.IsDevelopment())
+// {
+//     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+//     app.UseHsts();
+// }
+
+    // if (app.Environment.IsDevelopment())
+    // {
+    //     app.UseDeveloperExceptionPage();
+    // }
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

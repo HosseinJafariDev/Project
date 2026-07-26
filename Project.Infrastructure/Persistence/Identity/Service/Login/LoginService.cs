@@ -14,7 +14,6 @@ public class LoginService(SignInManager<User> signInManager) : ILoginService
             input.Password,
             input.RememberMe,
             lockoutOnFailure: true);
-
         return result.Succeeded;
     }
 }

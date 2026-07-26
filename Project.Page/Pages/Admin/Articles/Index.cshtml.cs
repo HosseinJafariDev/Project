@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Project.Application.UseCases.Articles.DeleteArticle;
@@ -8,10 +9,12 @@ using Project.Page.Mappers;
 
 namespace Project.Page.Pages.Admin.Articles;
 
+[Authorize]
 public class Index(IGetAllArticleUseCase allArticleUseCase, IDeleteArticleUseCase deleteArticleUseCase) : PageModel
 {
     public List<ArticleResponse> Articles { get; set; } = new List<ArticleResponse>();
     [BindProperty] public ArticleDeleteRequest ArticleDeleteRequest { get; set; }
+
 
     public async Task OnGetAsync(CancellationToken cancellationToken)
     {
@@ -21,6 +24,8 @@ public class Index(IGetAllArticleUseCase allArticleUseCase, IDeleteArticleUseCas
 
     public async Task<IActionResult> OnPostDeleteAsync(CancellationToken cancellationToken)
     {
+        if (!User.IsInRole("Admin"))
+            return Forbid();
         Console.WriteLine(ArticleDeleteRequest.CreatedAt);
         var article = ArticleDeleteRequest.ToDeleteArticleInputDto();
         var result = await deleteArticleUseCase.ExecuteAsync(article, cancellationToken);

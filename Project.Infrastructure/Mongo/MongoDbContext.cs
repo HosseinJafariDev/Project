@@ -10,7 +10,7 @@ public class MongoDbContext(IMongoDatabase database)
         get
         {
             return database
-                .GetCollection<LogDocument>("Log");
+                .GetCollection<LogDocument>("Logs");
         }
     }
 }

@@ -23,7 +23,7 @@ public class RegisterService(UserManager<User> userManager) : IRegisterService
             };
         }
 
-        await userManager.AddToRoleAsync(user, nameof(Roles.User));
+        await userManager.AddToRoleAsync(user, nameof(Roles.Author));
 
         return new RegisterOutputDto()
         {
