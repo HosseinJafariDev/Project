@@ -46,6 +46,9 @@
                     <input type="text"
                            asp-for="SignUpRequest.FirsName"
                            placeholder="نام">
+                    
+                    <span asp-validation-for="SignUpRequest.FirsName"
+                          class="text-danger"></span>
 
                 </div>
 
@@ -56,6 +59,9 @@
                     <input type="text"
                            asp-for="SignUpRequest.Lastname"
                            placeholder="نام خانوادگی">
+                    
+                    <span asp-validation-for="SignUpRequest.Lastname"
+                          class="text-danger"></span>
 
                 </div>
 
@@ -68,6 +74,9 @@
                 <input type="text"
                        asp-for="SignUpRequest.Username"
                        placeholder="نام کاربری">
+                
+                <span asp-validation-for="SignUpRequest.Username"
+                      class="text-danger"></span>
 
             </div>
 
@@ -78,6 +87,9 @@
                 <input type="password"
                        asp-for="SignUpRequest.Password"
                        placeholder="رمز عبور">
+                
+                <span asp-validation-for="SignUpRequest.Password"
+                      class="text-danger"></span>
 
             </div>
 
@@ -88,6 +100,9 @@
                 <input type="text"
                        asp-for="SignUpRequest.PhoneNumber"
                        placeholder="09xxxxxxxxx">
+                
+                <span asp-validation-for="SignUpRequest.PhoneNumber"
+                      class="text-danger"></span>
 
             </div>
 

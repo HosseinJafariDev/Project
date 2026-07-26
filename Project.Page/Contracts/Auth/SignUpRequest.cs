@@ -1,10 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Project.Page.Contracts.Auth;
 
 public class SignUpRequest
 {
-    public string? FirsName { get; set; }
-    public string? Lastname { get; set; }
-    public string Username { get; set; } = null!;
-    public string Password { get; set; } = null!;
-    public string PhoneNumber { get; set; } = null!;
+    [Required] public string? FirsName { get; set; }
+    [Required] public string? Lastname { get; set; }
+    [Required] public string Username { get; set; } = null!;
+    [Required] public string Password { get; set; } = null!;
+    [Required] public string PhoneNumber { get; set; } = null!;
 }
